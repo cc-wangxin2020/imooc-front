@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation />
+    <navigation class="duration-500" />
   </div>
 </template>
 

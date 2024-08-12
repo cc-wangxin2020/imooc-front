@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white sticky top-0 left-0 z-10 last:mr-4">
+  <div class="bg-white dark:bg-zinc-900 sticky top-0 left-0 z-10 last:mr-4">
     <ul
       ref="ulTarget"
       class="relative flex overflow-x-auto p-1 text-sm text-zinc-600 overflow-hidden"
@@ -7,11 +7,11 @@
       <!-- slider滑块 -->
       <li
         ref="sliderTarget"
-        class="absolute h-[28px] bg-zinc-900 rounded-lg duration-200"
+        class="absolute h-[28px] bg-zinc-900 dark:bg-zinc-800 rounded-lg duration-200"
         :style="sliderStyle"
       ></li>
       <li
-        v-for="(item, index) in data"
+        v-for="(item, index) in $store.getters.categorys"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200"
         :class="{
@@ -24,7 +24,7 @@
       </li>
       <!-- 面包屑 -->
       <li
-        class="z-20 fixed top-[3px] right-[-1px] h-4 px-1 flex items-center bg-white shadow-l-white"
+        class="z-20 fixed top-[3px] right-[-1px] h-4 px-1 flex items-center bg-white dark:bg-zinc-900 shadow-l-white dark:shadow-l-zinc"
       >
         <m-svg-icon
           class="w-1.5 h-1.5"
@@ -34,7 +34,7 @@
       </li>
     </ul>
     <m-popup v-model="isOpenPopup">
-      <menu-vue :categories="data" @onItemClick="onItemClick"></menu-vue>
+      <menu-vue @onItemClick="onItemClick"></menu-vue>
     </m-popup>
   </div>
 </template>
@@ -43,12 +43,7 @@
 import MenuVue from '../../menu/index.vue'
 import { onBeforeUpdate, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
-defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
+
 const sliderStyle = ref({
   transfrom: 'translateX(-10px)',
   width: '58px'

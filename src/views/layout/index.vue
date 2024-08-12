@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen">
-    <header-vue class="h-header"></header-vue>
+    <header-vue class="h-header duration-500"></header-vue>
     <main-vue class="h-main"></main-vue>
     <floating-vue></floating-vue>
   </div>

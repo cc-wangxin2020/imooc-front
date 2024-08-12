@@ -1,5 +1,5 @@
 <template>
-  <div class="h-main">二级路由</div>
+  <router-view></router-view>
 </template>
 
 <script setup>

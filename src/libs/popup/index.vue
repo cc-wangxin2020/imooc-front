@@ -4,7 +4,7 @@
       <transition name="fade">
         <div
           v-if="isPopup"
-          class="w-screen h-screen fixed top-0 left-0 bg-zinc-900/80 z-40"
+          class="w-screen h-screen fixed top-0 left-0 bg-zinc-900/80 dark:bg-zinc-800 z-40"
           @click="isPopup = !isPopup"
         ></div>
       </transition>

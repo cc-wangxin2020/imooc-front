@@ -3,9 +3,9 @@
     <h2 class="text-xl text-zinc-900 font-bold mb-2 px-1">所有分类</h2>
     <ul class="overflow-y-scroll">
       <li
-        v-for="(item, index) in categories"
+        v-for="(item, index) in $store.getters.categorys"
         :key="index"
-        class="text-base text-zinc-900 px-1 py-1 duration-100 active:bg-zinc-100"
+        class="text-base text-zinc-900 dark:text-zinc-300 px-1 py-1 duration-100 active:bg-zinc-100 active:dark:bg-zinc-900"
         @click="$emit('onItemClick', index)"
       >
         {{ item.name }}
@@ -15,12 +15,6 @@
 </template>
 
 <script setup>
-defineProps({
-  categories: {
-    type: Array,
-    required: true
-  }
-})
 </script>
 
 <style>
