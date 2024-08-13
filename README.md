@@ -4,7 +4,7 @@
 `popup`、`popover`、`search`、`menu`
 
 ##### 业务相关：
-`header`、响应式`navigationBar`、主题切换(`dark`、`light`、跟随系统)
+`header`、响应式`navigationBar`、主题切换(`dark`、`light`、跟随系统)、瀑布流
 * 路由逻辑
   * 移动端——一级路由
   * PC端
@@ -18,3 +18,4 @@
   * 将`themeType`存储在`store`全局状态中
   * 根据全局状态为根元素`html`添加`class`
   * 跟随系统主题：通过`window.matchMedia('(prefers-color-scheme: dark)')`返回的`onChange`方法监听系统主题变化
+* 
