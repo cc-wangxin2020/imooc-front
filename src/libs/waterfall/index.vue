@@ -82,7 +82,6 @@ const waitImgComplate = () => {
     itemElements.forEach((el) => {
       itemHeights.push(el.offsetHeight)
     })
-    console.log(itemHeights)
     useItemLocation()
   })
 }
@@ -128,8 +127,6 @@ const getItemLeft = () => {
 }
 const getItemTop = () => {
   const minHeight = getMinHeight(columnHeightObj.value)
-  console.log(minHeight)
-
   return minHeight
 }
 const increasingHeight = (index) => {
