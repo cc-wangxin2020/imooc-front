@@ -6,7 +6,7 @@
         v-for="(item, index) in $store.getters.categorys"
         :key="index"
         class="text-base text-zinc-900 dark:text-zinc-300 px-1 py-1 duration-100 active:bg-zinc-100 active:dark:bg-zinc-900"
-        @click="$emit('onItemClick', index)"
+        @click="$emit('onItemClick', item)"
       >
         {{ item.name }}
       </li>

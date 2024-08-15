@@ -15,10 +15,10 @@
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200"
         :class="{
-          'text-zinc-100': currentCategoryIndex === index
+          'text-zinc-100': $store.getters.currentCategoryIndex === index
         }"
         :ref="setItemRef"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>
@@ -43,13 +43,13 @@
 import MenuVue from '../../menu/index.vue'
 import { onBeforeUpdate, ref, watch } from 'vue'
 import { useScroll } from '@vueuse/core'
-
+import { useStore } from 'vuex'
+const store = useStore()
 const sliderStyle = ref({
   transfrom: 'translateX(-10px)',
   width: '58px'
 })
 // 选中item的下标
-const currentCategoryIndex = ref(0)
 // 获取所有item元素
 let itemRefs = []
 const setItemRef = (el) => {
@@ -63,9 +63,12 @@ onBeforeUpdate(() => {
 // 获取ul的横向滚动距离
 const ulTarget = ref(null)
 const { x: ulScrollLeft } = useScroll(ulTarget)
-watch(currentCategoryIndex, (val) => {
-  getBoundingByIndex(val)
-})
+watch(
+  () => store.getters.currentCategoryIndex,
+  (val) => {
+    getBoundingByIndex(val)
+  }
+)
 const getBoundingByIndex = (val) => {
   const { left, width } = itemRefs[val].getBoundingClientRect()
   sliderStyle.value = {
@@ -76,8 +79,8 @@ const getBoundingByIndex = (val) => {
 
 // 弹出层
 const isOpenPopup = ref(false)
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+const onItemClick = (item) => {
+  store.commit('app/setCurrentCategory', item)
   isOpenPopup.value = false
 }
 </script>

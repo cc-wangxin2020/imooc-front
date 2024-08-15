@@ -6,7 +6,7 @@
     >
       <!-- lg 下展开箭头 -->
       <div
-        class="absolute right-1 bottom-1 z-20 p-1 rounded cursor-pointer duration-200 hover:bg-zinc-200  dark:hover:bg-zinc-900"
+        class="absolute right-1 bottom-1 z-20 p-1 rounded cursor-pointer duration-200 hover:bg-zinc-200 dark:hover:bg-zinc-900"
         @click="triggerState"
       >
         <m-svg-icon
@@ -21,9 +21,10 @@
         :key="item.id"
         class="shrink-0 px-1.5 py-0 z-10 duration-200 last:mr-4 text-zinc-900 dark:text-zinc-500 dark:hover:text-zinc-300 text-base font-bold h-4 leading-4 cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-900 rounded mr-1 mb-1"
         :class="{
-          'text-zinc-900 dark:text-zinc-300 bg-zinc-200 dark:bg-zinc-900': currentCategoryIndex === index
+          'text-zinc-900 dark:text-zinc-300 bg-zinc-200 dark:bg-zinc-900':
+            $store.getters.currentCategoryIndex === index
         }"
-        @click="onItemClick(index)"
+        @click="onItemClick(item)"
       >
         {{ item.name }}
       </li>
@@ -32,13 +33,14 @@
 </template>
 <script setup>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
 const isOpenCategoty = ref(false)
 const triggerState = () => {
   isOpenCategoty.value = !isOpenCategoty.value
 }
-const currentCategoryIndex = ref(0)
-const onItemClick = (index) => {
-  currentCategoryIndex.value = index
+const store = useStore()
+const onItemClick = (item) => {
+  store.commit('app/setCurrentCategory', item)
 }
 </script>
 

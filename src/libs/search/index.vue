@@ -10,7 +10,7 @@
         color="#707070"
       ></m-svg-icon>
       <input
-        class="block w-full h-[44px] pl-4 text-base outline-0 bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide font-semibold border border-zinc-100 duration-500 group-hover:bg-white group-hover:border-zinc-200 focus:border-red-300  dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 dark:group-hover:bg-zinc-900 dark:group-hover:border-zinc-700"
+        class="block w-full h-[44px] pl-4 text-base outline-0 bg-zinc-100 caret-zinc-400 rounded-xl text-zinc-900 tracking-wide font-semibold border border-zinc-100 duration-500 group-hover:bg-white group-hover:border-zinc-200 focus:border-red-300 dark:bg-zinc-800 dark:text-zinc-200 dark:border-zinc-700 dark:group-hover:bg-zinc-900 dark:group-hover:border-zinc-700"
         type="text"
         placeholder="搜索"
         v-model="inputValue"
@@ -74,8 +74,11 @@ const emits = defineEmits([
   EMIT_BLUR
 ])
 const inputValue = useVModel(props)
+const inputRef = ref(null)
 const onSearchHandler = () => {
-  emits(EMIT_SEARCH, inputValue.value)
+  console.log(inputRef)
+
+  emits(EMIT_SEARCH, inputValue.value, inputRef)
 }
 const onClearClick = () => {
   inputValue.value = ''

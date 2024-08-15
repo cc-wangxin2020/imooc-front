@@ -1,7 +1,7 @@
 ## Vue 3 + TailWindCSS + Vite 实现适配移动端和PC端个人博客项目
 
 ##### 通用组件：
-`popup`、`popover`、`search`、`menu`、`waterfall`、`infinite-list`
+`popup`、`popover`、`search`、`menu`、`waterfall`、`infinite-list`、`confirm`
 * 通用瀑布流组件——`waterfall`
   * 瀑布流的核心就是：通过 relative  和 absolute 定位的方式，来控制每个 item 的位置 
   * 影响瀑布流高度的主要元素，通常都是 img 标签
@@ -22,6 +22,13 @@
   * **注意**：
     当首次加载的数据为占满全屏时，数据会出现无法继续加载的情况
     解决方案：监听`loading`变化来触发数据加载，当`loading`变化时触发数据加载
+* 确认框组件——`confirm`
+  * 实现通过函数调用的方式实现组件调用
+  * 定义数据`props`+定义模板
+  * 定义`confirm`函数返回一个`promise`，点击“确定”执行成功的回调，点击“取消”执行失败的回调
+  * 通过`h`函数生成虚拟`dom`
+  * 通过`renderer`函数将虚拟`dom`转换成真实`dom`
+  * **注意：** 在onMounted中执行`show`方法并且延迟一段时间执行`close`方法，否则出现消失动画不生效
 ##### 业务相关：
 `header`、响应式`navigationBar`、主题切换(`dark`、`light`、跟随系统)、瀑布流组件
 * 路由逻辑
@@ -41,6 +48,14 @@
   * 封装通用长列表组件——实现**数据懒加载**，当页面划到底端时加载数据
   * 封装通用瀑布流组件——实现`item`项根据内容宽高进行展示
   * 自定义指令实现图片懒加载(`IntersectionObserver`)
+* `searchBar`相关功能完善
+  * 搜索提示、提示高亮
+  * 搜索历史处理
+    * 搜索历史保存在`vuex`中并做持久化处理
+    * 实现删除历史记录、自动添加搜索历史功能
+  * 主题推荐
+* `navigationBar`与`list` 、`search`与`list`联动
+  * 将共享数据保存在 `vuex`中统一管理
 
 #### 框架相关
 * 自动注册组件
