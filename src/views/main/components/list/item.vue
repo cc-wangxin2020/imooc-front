@@ -13,6 +13,7 @@
     >
       <img
         v-lazy
+        ref="imgTarget"
         class="w-full rounded bg-transparent"
         :style="{
           height: (width / data.photoWidth) * data.photoHeight + 'px'
@@ -36,6 +37,7 @@
           iconClass="fill-zinc-900 dark:fill-zinc-200"
           type="info"
           size="small"
+          @click="onDownload"
         ></m-button>
         <m-button
           class="absolute bottom-1.5 right-1.5 bg-zinc-100/70"
@@ -43,6 +45,7 @@
           iconClass="fill-zinc-900 dark:fill-zinc-200"
           type="info"
           size="small"
+          @click="onImgFullScreen"
         ></m-button>
       </div>
     </div>
@@ -59,8 +62,12 @@
 </template>
 
 <script setup>
+import { saveAs } from 'file-saver'
 import { randomRGB } from '@/utils/color.js'
-defineProps({
+import { message } from '@/libs'
+import { useFullscreen } from '@vueuse/core'
+import { ref } from 'vue'
+const props = defineProps({
   data: {
     type: Object
   },
@@ -68,6 +75,18 @@ defineProps({
     type: Number
   }
 })
+
+const onDownload = () => {
+  message('success', '下载文件')
+  setTimeout(() => {
+    /**
+     * 1. 下载的图片链接
+     */
+    saveAs(props.data.photo)
+  }, 100)
+}
+const imgTarget = ref(null)
+const { enter: onImgFullScreen } = useFullscreen(imgTarget)
 </script>
 
 <style>
