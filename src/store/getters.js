@@ -8,5 +8,7 @@ export default {
     })
   },
   searchText: (state) => state.app.searchText,
-  history: (state) => state.search.history
+  history: (state) => state.search.history,
+  token: (state) => state.user.token,
+  userInfo: (state) => state.user.userInfo
 }

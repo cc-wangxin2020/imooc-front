@@ -9,6 +9,7 @@ import mDirectives from './directives'
 import 'virtual:svg-icons-register'
 import store from './store'
 import initTheme from './utils/theme'
+import './permission'
 useREM()
 initTheme()
 createApp(App).use(mLibs).use(mDirectives).use(store).use(router).mount('#app')

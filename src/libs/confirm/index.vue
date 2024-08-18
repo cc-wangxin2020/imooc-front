@@ -103,7 +103,7 @@ onMounted(() => {
 }
 
 .confirm-down-up-enter-active,
-.fade-leave-active {
+.confirm-down-up-leave-active {
   transition: all v-bind(duration);
 }
 .confirm-down-up-enter-from,

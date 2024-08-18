@@ -23,3 +23,9 @@ export const getThemes = () => {
     url: '/pexels/themes'
   })
 }
+
+export const getPexelsById = (id) => {
+  return request({
+    url: `/pexels/${id}`
+  })
+}

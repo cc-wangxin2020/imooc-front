@@ -29,8 +29,13 @@
   * 通过`h`函数生成虚拟`dom`
   * 通过`renderer`函数将虚拟`dom`转换成真实`dom`
   * **注意：** 在onMounted中执行`show`方法并且延迟一段时间执行`close`方法，否则出现消失动画不生效
+* 提示框组件——`message`
+  * 通过函数调用的方式实现组件调用
+  * 定义数据`props`+定义模板
+  * 与`confirm`组件不同，提示框组件不需要用户操作因此不用返回`promise`
+  * 动画结束后进行组件销毁——执行`renderer(null, document.body)`
 ##### 业务相关：
-`header`、响应式`navigationBar`、主题切换(`dark`、`light`、跟随系统)、瀑布流组件
+`header`、响应式`navigationBar`、主题切换(`dark`、`light`、跟随系统)、瀑布流组件、功能引导、图片下载、全屏
 * 路由逻辑
   * 移动端——一级路由
   * PC端
@@ -56,7 +61,22 @@
   * 主题推荐
 * `navigationBar`与`list` 、`search`与`list`联动
   * 将共享数据保存在 `vuex`中统一管理
-
+* 功能引导——`diver.js`
+* 图片下载
+  * 小文件下载——`file-saver`
+  * 大文件下载——`streamsaver`
+* 全屏——`useFullScreen`(`Element.requestFullscreen()`——进入全屏；`Document.exitFullscreen()`——退出全屏)
+* 点击`item`实现到详情页的路由效果过渡
+  * 问题：`transition`只能针对元素和组件的切换产生过渡效果，对于路由变化导致页面切换无法实现过渡效果
+  * 解决：通过`history.pushState()`方法改变路由但不切换页面，并将`item`详情页以**组件**的形式展示
+  * 采用`GSAP`动画库来实现过渡动画效果
+* 用户登录
+  * 表单验证——`vee-validator`
+  * 人类行为验证
+  * 登录、注册、退出
+  * 登录鉴权
+  * 第三方登录
+* 图片裁剪与上传
 #### 框架相关
 * 自动注册组件
   * `import.mate.glob`

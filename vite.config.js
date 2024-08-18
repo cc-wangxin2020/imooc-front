@@ -9,11 +9,12 @@ export default defineConfig({
     createSvgIconsPlugin({
       iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
       symbolId: 'icon-[name]'
-    })
+    }),
   ],
   resolve: {
     alias: {
-      '@': join(__dirname, '/src')
+      '@': join(__dirname, '/src'),
+      "source-map-js": "source-map"
     }
   },
   server: {

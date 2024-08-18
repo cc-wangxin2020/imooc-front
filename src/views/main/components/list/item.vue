@@ -10,6 +10,7 @@
       :style="{
         background: randomRGB()
       }"
+      @click="onPinsClick"
     >
       <img
         v-lazy
@@ -65,8 +66,8 @@
 import { saveAs } from 'file-saver'
 import { randomRGB } from '@/utils/color.js'
 import { message } from '@/libs'
-import { useFullscreen } from '@vueuse/core'
-import { ref } from 'vue'
+import { useElementBounding, useFullscreen } from '@vueuse/core'
+import { computed, ref } from 'vue'
 const props = defineProps({
   data: {
     type: Object
@@ -75,7 +76,7 @@ const props = defineProps({
     type: Number
   }
 })
-
+const emits = defineEmits(['click'])
 const onDownload = () => {
   message('success', '下载文件')
   setTimeout(() => {
@@ -87,6 +88,24 @@ const onDownload = () => {
 }
 const imgTarget = ref(null)
 const { enter: onImgFullScreen } = useFullscreen(imgTarget)
+const {
+  x: containerX,
+  y: containerY,
+  width: containerWidth,
+  height: containerHeight
+} = useElementBounding(imgTarget)
+const location = computed(() => {
+  return {
+    translateX: parseInt(containerX.value + containerWidth.value / 2),
+    translateY: parseInt(containerY.value + containerHeight.value / 2)
+  }
+})
+const onPinsClick = () => {
+  emits('click', {
+    id: props.data.id,
+    location: location.value
+  })
+}
 </script>
 
 <style>
