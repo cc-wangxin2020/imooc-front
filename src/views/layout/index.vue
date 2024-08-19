@@ -7,7 +7,7 @@
     <div class="h-main">
       <main-vue></main-vue>
     </div>
-    <floating-vue></floating-vue>
+    <floating-vue v-if="!isMobileTerminal"></floating-vue>
   </div>
 </template>
 

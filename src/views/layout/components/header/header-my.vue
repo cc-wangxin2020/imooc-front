@@ -73,12 +73,17 @@ const menuArr = [
 ]
 const router = useRouter()
 const onLogin = () => {
+  store.commit('app/changeRouterType', 'push')
   router.push('/login')
 }
 const store = useStore()
 const onItemClick = (id) => {
   if (id === 0) {
+    store.commit('app/changeRouterType', 'push')
     router.push('/profile')
+  }
+  if (id === 1) {
+    router.push('/member')
   }
   if (id === 2) {
     confirm('确定要退出登录吗？').then(() => {

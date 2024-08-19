@@ -6,7 +6,7 @@
       class="relative max-w-screen-lg mx-auto bg-white dark:bg-zinc-900 duration-400 xl:rounded-sm xl:border-zinc-200 xl:dark:border-zinc-600 xl:border-[1px] xl:px-4 xl:py-2"
     >
       <!-- 移动端 navbar -->
-      <m-navbar sticky v-if="isMobileTerminal" :clickLeft="onNavbarLeftClick">
+      <m-navbar sticky v-if="isMobileTerminal" @onClickLeft="onNavbarLeftClick">
         个人资料
       </m-navbar>
       <!-- pc 端 -->
@@ -147,7 +147,11 @@
     </m-popup>
   </div>
 </template>
-
+<script>
+export default {
+  name: 'profile'
+}
+</script>
 <script setup>
 import ChangeAvatarVue from './components/change-avatar.vue'
 import { isMobileTerminal } from '@/utils/flexible'
@@ -156,6 +160,8 @@ import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 import { ref, watch } from 'vue'
 import { putProfile } from '@/api/sys'
+
+console.log('profile被渲染')
 
 const store = useStore()
 const router = useRouter()
@@ -188,6 +194,7 @@ watch(isVisible, () => {
  * 移动端后退处理
  */
 const onNavbarLeftClick = () => {
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 

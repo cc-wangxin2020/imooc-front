@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="pexelData.title"
-    class=" fixed top-0 left-0 w-screen h-screen pb-2 bg-zinc-200 z-20 backdrop-blur-4xl bg-transparent overflow-y-auto xl:p-2"
+    class="fixed top-0 left-0 w-screen h-screen pb-2 bg-zinc-200 z-20 backdrop-blur-4xl bg-transparent overflow-y-auto xl:p-2"
   >
     <m-navbar
       v-if="isMobileTerminal"
@@ -25,7 +25,9 @@
       fillClass="fill-zinc-400"
       @click="onPop"
     ></m-svg-icon>
-    <div class="duration-300 xl:w-[80%] xl:h-full xl:mx-auto xl:rounded-lg xl:flex">
+    <div
+      class="duration-300 xl:w-[80%] xl:h-full xl:mx-auto xl:rounded-lg xl:flex"
+    >
       <img
         v-lazy
         class="w-screen h-full duration-300 mb-2 object-cover xl:w-3/5 xl:h-full xl:rounded-tl-lg xl:rounded-bl-lg"
@@ -36,12 +38,19 @@
         class="xl:w-2/5 xl:h-full xl:bg-white xl:dark:bg-zinc-900 xl:rounded-tr-lg xl:rounded-br-lg"
       >
         <!-- pc下显示分享和收藏按钮 -->
-        <div v-if="!isMobileTerminal" class="flex items-center p-2 my-2 mx-2 justify-between">
+        <div
+          v-if="!isMobileTerminal"
+          class="flex items-center p-2 my-2 mx-2 justify-between"
+        >
           <m-svg-icon
             class="w-4 h-4 p-1 rounded cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-800"
             name="share"
           ></m-svg-icon>
-          <m-button type="info" icon="heart"  iconClass="fill-zinc-900 dark:fill-zinc-200" ></m-button>
+          <m-button
+            type="info"
+            icon="heart"
+            iconClass="fill-zinc-900 dark:fill-zinc-200"
+          ></m-button>
         </div>
         <!-- 标题 -->
         <p
@@ -56,7 +65,7 @@
             :src="pexelData.avatar"
             alt=""
           />
-          <span class="text-sm text-zinc-900 dark:text-zinc-200 duration-300" >{{
+          <span class="text-sm text-zinc-900 dark:text-zinc-200 duration-300">{{
             pexelData.author
           }}</span>
         </div>
@@ -70,17 +79,21 @@ import { useRouter } from 'vue-router'
 import { getPexelsById } from '@/api/pexels'
 import { ref } from 'vue'
 import { isMobileTerminal } from '@/utils/flexible'
+import { useStore } from 'vuex'
 const props = defineProps({
   id: {
     type: String,
     required: true
   }
 })
+const store = useStore()
 const router = useRouter()
 const onPop = () => {
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 const onClickRight = () => {
+  store.commit('app/changeRouterType', 'back')
   router.back()
 }
 const pexelData = ref({})
