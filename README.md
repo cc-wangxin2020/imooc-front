@@ -137,9 +137,7 @@
             proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
             proxy_set_header   Cookie            $http_cookie; # cookie 配置
         }
-}
-
-    ```
+    }
 #### 框架相关
 * 自动注册组件
   * `import.mate.glob`
