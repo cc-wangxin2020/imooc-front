@@ -107,6 +107,39 @@
 * 问题反馈
 * 分享功能对接
 * 支付功能对接
+* 打包与发布
+  * 申请云服务器、域名
+  * 安装nginx、ssl模块
+  * nginx.conf中配置
+    ``` server {
+    # 端口
+    listen       80;
+    # 域名
+    server_name  www.ccwangxin.com;
+    # 资源地址
+    root   /nginx/dist/;
+    # 目录浏览
+    autoindex on;
+    # 缓存处理
+    add_header Cache-Control "no-cache, must-revalidate";
+    # 请求配置
+    location / {
+        # 跨域
+        add_header Access-Control-Allow-Origin *;
+        # 返回 index.html
+        try_files $uri $uri/ /index.html;
+    }
+    location /prod-api/ {
+            proxy_pass api.imooc-front.lgdsunday.club;
+            # $host 变量，Host 为变量名 
+            proxy_set_header   Host              $host; #域名转发
+            proxy_set_header   X-Real-IP         $remote_addr; #IP转发						
+            proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header   Cookie            $http_cookie; # cookie 配置
+        }
+}
+
+    ```
 #### 框架相关
 * 自动注册组件
   * `import.mate.glob`
